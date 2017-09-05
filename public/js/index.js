@@ -12,11 +12,19 @@ socket.on('disconnect', function () {
 });
 
 socket.on('newMessage', function (msg) {
-  console.log('newMessage', msg);
-  var li = $('<li></li>');
-  li.text(`${msg.from} ${msg.createdAt}: ${msg.text}`);
+  var tmpl = $('#message-template').html();
+  var html = Mustache.render(tmpl, {
+    text: msg.text,
+    from: msg.from,
+    createdAt: msg.createdAt
+  });
 
-  $('#messages').append(li);
+  $('#messages').append(html);
+  // console.log('newMessage', msg);
+  // var li = $('<li></li>');
+  // li.text(`${msg.from} ${msg.createdAt}: ${msg.text}`);
+  //
+  // $('#messages').append(li);
 });
 
 socket.on('newLocationMessage', function (msg) {
