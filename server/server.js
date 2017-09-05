@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
   socket.on('createMessage', (msg, callback) => {
     console.log('createMessage', msg);
     // io emits to every connection
-    io.emit('newMessage', generateMessage(msg.from, msg.text, msg.createdAt));
+    io.emit('newMessage', generateMessage(msg.from, msg.text));
     callback();
   });
 
