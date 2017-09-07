@@ -15,12 +15,22 @@ function scrollToBottom() {
   var lastMsgHeight = newMsg.prev().innerHeight();
 
   if (clientHeight + scrollTop + newMsgHeight + lastMsgHeight >= scrollHeight) {
-    console.log('should scroll');
+    msgs.scrollTop(scrollHeight);
   }
 }
 
 socket.on('connect', function () {
   console.log('Connected to server');
+  var params = $.deparam(window.location.search);
+
+  socket.emit('join', params, function (err) {
+    if (err) {
+      alert(err);   // change to boostrap modal
+      window.location.href = '/';
+    } else {
+      console.log('No errors');
+    }
+  });
 });
 
 socket.on('disconnect', function () {
