@@ -4,8 +4,6 @@ const path = require('path');
 
 const {app, BrowserWindow, Menu} = electron;
 
-let index;
-
 const mainMenuTemplate = [
   {
     label: 'File',
@@ -27,8 +25,8 @@ const mainMenuTemplate = [
   }
 ];
 
-app.on('ready', () => {
-  index = new BrowserWindow({});
+app.on('ready', function() {
+  let index = new BrowserWindow({});
   index.loadURL(url.format({
     pathname: path.join(__dirname, '/public/index.html'),
     protocol: 'file:',
